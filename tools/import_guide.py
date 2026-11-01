@@ -3,11 +3,14 @@
 
     python3 tools/import_guide.py ../ytproject/catalog/ikea/lack-tv-bench-aa2248458/spec.json \
         --image path/to/thumbnail.jpg [--chapters out/final/chapters.json] \
-        [--youtube-id VIDEO_ID --published 2026-11-03] [--category "TV benches"]
+        [--youtube-id VIDEO_ID --published 2026-11-03] [--category "TV benches"] [--model3d DIR]
 
 Writes data/guides/<slug>.json (and assets/img/guides/<slug>.jpg from --image). Re-running keeps fields that are
 already in the file and not given again (youtube_id, published, category, image), so a guide can be imported
 before its video is out and updated with the video ID later. Then run tools/build.py.
+
+--model3d takes the folder written by ytproject `python -m pipeline.web export` (model.glb + guide3d.json), copies
+it to assets/3d/<slug>/ and gives the guide its interactive 3D page (guides/<slug>/3d/).
 
 Only the English text of the spec is used: the site is in English.
 """
@@ -15,7 +18,9 @@ Only the English text of the spec is used: the site is in English.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import shutil
 import re
 import sys
 from pathlib import Path
@@ -23,6 +28,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 GUIDES = ROOT / "data" / "guides"
 IMAGES = ROOT / "assets" / "img" / "guides"
+MODELS = ROOT / "assets" / "3d"
 
 # product.name (lower case) -> category shown on the site; mirrors the playlists in ytproject brand/config.yaml.
 CATEGORIES = {
@@ -125,6 +131,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--youtube-id")
     ap.add_argument("--published", help="publish date YYYY-MM-DD")
     ap.add_argument("--category")
+    ap.add_argument("--model3d", type=Path, help="folder from ytproject python -m pipeline.web export")
     a = ap.parse_args(argv)
 
     spec = json.loads(a.spec.read_text(encoding="utf-8"))
@@ -133,7 +140,7 @@ def main(argv: list[str] | None = None) -> int:
 
     out = GUIDES / f"{g['slug']}.json"
     old = json.loads(out.read_text(encoding="utf-8")) if out.exists() else {}
-    for k in ("youtube_id", "published", "category", "image", "duration_s"):
+    for k in ("youtube_id", "published", "category", "image", "duration_s", "model3d"):
         if old.get(k) and not g.get(k):
             g[k] = old[k]
     if not chapters and old.get("steps"):  # keep chapter times from an earlier import
@@ -156,6 +163,24 @@ def main(argv: list[str] | None = None) -> int:
         dest = IMAGES / f"{g['slug']}.jpg"
         im.save(dest, "JPEG", quality=82, optimize=True, progressive=True)
         g["image"] = f"assets/img/guides/{dest.name}"
+
+    if a.model3d:
+        meta = json.loads((a.model3d / "guide3d.json").read_text(encoding="utf-8"))
+        if meta.get("assembly_id") != g["assembly_id"]:
+            raise SystemExit(f"--model3d is for {meta.get('assembly_id')}, the spec is {g['assembly_id']}")
+        glb = (a.model3d / meta["model"]).read_bytes()
+        if hashlib.sha256(glb).hexdigest() != meta["model_sha256"]:
+            raise SystemExit("model.glb does not match guide3d.json (re-run the export)")
+        dest = MODELS / g["slug"]
+        dest.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(a.model3d / "guide3d.json", dest / "guide3d.json")
+        (dest / meta["model"]).write_bytes(glb)
+        g["model3d"] = {
+            "dir": f"assets/3d/{g['slug']}",
+            "compile_key": meta["compile_key"],
+            "version": meta["model_sha256"][:10],  # cache-buster for the viewer script URL
+            "duration_s": meta["duration_s"],
+        }
 
     GUIDES.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(g, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")

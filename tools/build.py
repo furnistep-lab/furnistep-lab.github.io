@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
 import json
 import re
 import sys
@@ -24,7 +25,7 @@ YOUTUBE = "https://www.youtube.com/@FurniStep"
 SUBSCRIBE = YOUTUBE + "?sub_confirmation=1"
 EMAIL = "furnistep@gmail.com"
 YEAR = 2026
-CSS_VERSION = "2"  # bump when assets/site.css or assets/site.js change, so browsers fetch the new file
+CSS_VERSION = "3"  # bump when assets/site.css or assets/site.js change, so browsers fetch the new file
 
 NAV = [("/guides/", "Guides"), ("/request/", "Request a guide"), ("/about/", "About")]
 
@@ -41,6 +42,7 @@ ICONS = {
     "info": '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/>',
     "mail": '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
     "chat": '<path d="M4 5h16v11H9l-5 4z"/>',
+    "rotate": '<path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/>',
     "music": '<path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/>',
 }
 
@@ -185,7 +187,8 @@ def video_block(g: dict) -> str:
     return f"""<div class="video video-soon">
  <div class="soon-over"><strong>Video coming soon</strong>
  <span>New guides go live every Tuesday, Thursday and Saturday at 15:00 UTC.</span>
- <a class="btn btn-yellow" href="{SUBSCRIBE}">Subscribe to get notified</a></div>
+ <div class="actions center">{f'<a class="btn btn-yellow" href="{viewer_url(g)}">{icon("cube", "ic-xs")} See it in 3D now</a>' if g.get("model3d") else ""}
+ <a class="btn {"btn-ghost-light" if g.get("model3d") else "btn-yellow"}" href="{SUBSCRIBE}">Subscribe to get notified</a></div></div>
 </div>"""
 
 
@@ -234,11 +237,16 @@ def guide_page(g: dict, guides: list[dict]) -> str:
                 f'<a class="seek" href="https://www.youtube.com/watch?v={e(g["youtube_id"])}&amp;t={t}s" '
                 f'data-seek="{t}">{icon("play", "ic-xs")}{fmt_time(s["start_s"])}</a>'
             )
+        if g.get("model3d"):
+            seek += (
+                f'<a class="seek seek-3d" href="{viewer_url(g)}#step-{s["n"]}">{icon("cube", "ic-xs")}'
+                f'<span>3D<span class="sr"> view of step {s["n"]}</span></span></a>'
+            )
         steps_html.append(
             f"""<li class="step" id="step-{s["n"]}">
  <div class="step-n" aria-hidden="true">{s["n"]}</div>
  <div class="step-body"><h3><span class="sr">Step {s["n"]}: </span>{e(head)}</h3>{body}{chips}{warn}{note}</div>
- {seek}
+ <div class="step-links">{seek}</div>
 </li>"""
         )
 
@@ -309,6 +317,7 @@ def guide_page(g: dict, guides: list[dict]) -> str:
 <h1>How to assemble the {e(name)} <span class="h1-dims">{e(g["dims_cm"])} cm</span></h1>
 <ul class="meta">{meta_html}</ul>
 {video_block(g)}
+{teaser_3d(g)}
 </div></section>
 
 <section class="section"><div class="wrap two">
@@ -329,6 +338,79 @@ is not affiliated with, sponsored by, or endorsed by {e(g["brand"])}.</p></div>
 {related_html}"""
     og = f"/{g['image']}" if g.get("image") else ""
     return layout(url, title, desc, body, extra_head=ld_html, og_image=og)
+
+
+def viewer_url(g: dict) -> str:
+    return f"/guides/{g['slug']}/3d/"
+
+
+def teaser_3d(g: dict) -> str:
+    if not g.get("model3d"):
+        return ""
+    return f"""<a class="teaser-3d" href="{viewer_url(g)}">
+ <span class="teaser-3d-ic">{icon("cube")}</span>
+ <span class="teaser-3d-t"><strong>New: explore this guide in 3D</strong>
+ <span>Play every step, then turn, zoom and look from any side.</span></span>
+ <span class="btn btn-navy btn-sm">Open 3D guide</span>
+</a>"""
+
+
+def viewer_page(g: dict) -> str:
+    """The interactive 3D guide: the video's own assembly animation, step by step, with free orbit and zoom."""
+    m = g["model3d"]
+    name = guide_name(g)
+    url = viewer_url(g)
+    title = f"{name} ({g['dims_cm']} cm) in 3D: interactive assembly guide"
+    desc = (
+        f"Interactive 3D assembly guide for the {name} ({g['dims_cm']} cm): play each step, pause, "
+        "turn the furniture and zoom in on every screw. Works on phones, no app needed."
+    )
+    steps = []
+    for s in g["steps"]:
+        head = s["title"] or s["text"]
+        steps.append(
+            f'<li><a href="#step-{s["n"]}" data-v3d-step="{s["n"]}"><span class="v3d-n">{s["n"]}</span>'
+            f"<span>{e(head)}</span></a></li>"
+        )
+    steps.append('<li><a href="#done" data-v3d-step="done"><span class="v3d-n">✓</span><span>Finished</span></a></li>')
+    tools = ", ".join(t["label"] for t in g["tools"])
+    body = f"""<section class="guide-head v3d-head"><div class="wrap">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/guides/">Guides</a> / <a href="{guide_url(g)}">{e(g["family"])} {e(g["type"])}</a> / <span>3D</span></nav>
+<h1>{e(name)} in 3D <span class="h1-dims">{e(g["dims_cm"])} cm</span></h1>
+<p class="lead">Play the assembly step by step. Drag to turn it, scroll or pinch to zoom, and press
+<strong>Follow camera</strong> to go back to the guided view.</p>
+
+<div class="v3d" data-src="/{e(m["dir"])}/" data-v="{e(m.get("version", ""))}" tabindex="-1">
+ <div class="v3d-main">
+  <div class="v3d-stage">
+   <p class="v3d-status" role="status">Loading 3D model…</p>
+   <noscript><p class="v3d-status">The 3D view needs JavaScript. <a href="{guide_url(g)}">See the written steps</a>.</p></noscript>
+  </div>
+  <p class="v3d-caption" aria-live="polite"></p>
+  <div class="v3d-bar">
+   <button type="button" class="v3d-btn v3d-prev" aria-label="Previous step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+   <button type="button" class="v3d-btn v3d-play" aria-label="Play"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></button>
+   <button type="button" class="v3d-btn v3d-next" aria-label="Next step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
+   <div class="v3d-track"><input class="v3d-scrub" type="range" min="0" max="1" step="0.01" value="0" aria-label="Position in the guide"><div class="v3d-ticks" aria-hidden="true"></div></div>
+   <span class="v3d-time">0:00</span>
+   <button type="button" class="v3d-btn v3d-speed" aria-label="Playback speed">1×</button>
+   <button type="button" class="v3d-btn v3d-follow is-on" aria-pressed="true">{icon("rotate", "ic-xs")}<span>Follow camera</span></button>
+   <button type="button" class="v3d-btn v3d-full" aria-label="Full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5v2H6v3zm11-5h5v5h-2V6h-3zM4 15h2v3h3v2H4zm14 0h2v5h-5v-2h3z"/></svg></button>
+  </div>
+ </div>
+ <aside class="v3d-steps" aria-label="Steps"><h2 class="sub">Steps</h2><ol>{"".join(steps)}</ol>
+ <p class="muted v3d-tools">{icon("tools", "ic-xs")} You need: {e(tools)}</p></aside>
+</div>
+<p class="muted v3d-keys">Keys: Space play or pause, ← → previous or next step, C follow camera.
+This is our own 3D model made from the manual, not the official instructions{f" ({e(g['manual_code'])})" if g.get("manual_code") else ""}:
+always follow the safety warnings in the manual that comes with your product.
+<a href="{guide_url(g)}">Back to the guide</a>.</p>
+</div></section>"""
+    js = ROOT / "assets" / "3d" / "viewer.js"
+    js_ver = hashlib.sha256(js.read_bytes()).hexdigest()[:10] if js.exists() else "0"
+    head = f'<script type="module" src="/assets/3d/viewer.js?v={js_ver}"></script>\n'
+    og = f"/{g['image']}" if g.get("image") else ""
+    return layout(url, title, desc, body, extra_head=head, og_image=og)
 
 
 def guides_index(guides: list[dict]) -> str:
@@ -471,6 +553,8 @@ def render_all() -> dict[str, str]:
     files: dict[str, str] = {"index.html": home(guides), "guides/index.html": guides_index(guides)}
     for g in guides:
         files[f"guides/{g['slug']}/index.html"] = guide_page(g, guides)
+        if g.get("model3d"):
+            files[f"guides/{g['slug']}/3d/index.html"] = viewer_page(g)
     files.update(static_pages())
     pages = [
         "/" + (k[: -len("index.html")] if k.endswith("index.html") else k)
@@ -500,6 +584,8 @@ def main(argv: list[str] | None = None) -> int:
     for d in (ROOT / "guides").glob("*/"):
         if f"guides/{d.name}/index.html" not in files:
             stale.append(f"guides/{d.name}/ (no data file)")
+        elif (d / "3d").is_dir() and f"guides/{d.name}/3d/index.html" not in files:
+            stale.append(f"guides/{d.name}/3d/ (no model3d in the data file)")
     if a.check:
         if stale:
             print("out of date (run python3 tools/build.py):\n  " + "\n  ".join(stale))
