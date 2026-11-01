@@ -220,5 +220,11 @@
    ],
    "start_s": null
   }
- ]
+ ],
+ "model3d": {
+  "dir": "assets/3d/ikea-lack-tv-bench-120x35x36",
+  "compile_key": "e86d980c14d3e51d2147dad17d3b5c92b7e20de1f5c41e796c4d317fd05919c9",
+  "version": "0433fa9aa4",
+  "duration_s": 140.12
+ }
 }
