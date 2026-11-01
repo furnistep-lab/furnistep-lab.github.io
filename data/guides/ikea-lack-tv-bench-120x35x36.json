@@ -1,0 +1,224 @@
+{
+ "slug": "ikea-lack-tv-bench-120x35x36",
+ "assembly_id": "ikea-lack-tv-bench-aa2248458",
+ "brand": "IKEA",
+ "family": "LACK",
+ "type": "TV bench",
+ "color": "White",
+ "dims_cm": "120x35x36",
+ "skus": [
+  "304.988.90"
+ ],
+ "manual_code": "AA-2248458-3",
+ "category": "TV benches & units",
+ "youtube_id": null,
+ "published": null,
+ "duration_s": null,
+ "image": "assets/img/guides/ikea-lack-tv-bench-120x35x36.jpg",
+ "parts": [
+  {
+   "label": "Top panel",
+   "qty": 1
+  },
+  {
+   "label": "Side panel",
+   "qty": 2
+  },
+  {
+   "label": "Bottom shelf",
+   "qty": 1
+  },
+  {
+   "label": "Leg",
+   "qty": 4
+  }
+ ],
+ "hardware": [
+  {
+   "label": "Long screw, hex socket",
+   "qty": 8,
+   "included": true
+  },
+  {
+   "label": "Cam bolt",
+   "qty": 4,
+   "included": true
+  },
+  {
+   "label": "Cam lock",
+   "qty": 4,
+   "included": true
+  },
+  {
+   "label": "Short screw for the angle bracket",
+   "qty": 4,
+   "included": true
+  },
+  {
+   "label": "Wooden dowel",
+   "qty": 4,
+   "included": true
+  },
+  {
+   "label": "Angle bracket for wall fixing",
+   "qty": 2,
+   "included": true
+  },
+  {
+   "label": "Bracket cover",
+   "qty": 2,
+   "included": true
+  },
+  {
+   "label": "Keyhole plate",
+   "qty": 2,
+   "included": true
+  },
+  {
+   "label": "Round-head wall screw",
+   "qty": 2,
+   "included": false
+  },
+  {
+   "label": "Wall plug",
+   "qty": 2,
+   "included": false
+  }
+ ],
+ "tools": [
+  {
+   "label": "Allen key 100092",
+   "included": true
+  },
+  {
+   "label": "Phillips screwdriver",
+   "included": false
+  },
+  {
+   "label": "Flat screwdriver",
+   "included": false
+  },
+  {
+   "label": "Pencil",
+   "included": false
+  },
+  {
+   "label": "Soft surface to work on (rug or blanket)",
+   "included": false
+  },
+  {
+   "label": "Drill for the wall holes (not shown in the manual)",
+   "included": false
+  }
+ ],
+ "steps": [
+  {
+   "n": 1,
+   "title": "",
+   "text": "Push a wooden dowel into one of the two holes on top of each leg.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": null
+  },
+  {
+   "n": 2,
+   "title": "",
+   "text": "Set the shelf on the legs and fix each leg with a long screw and the Allen key.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Allen key 100092"
+   ],
+   "start_s": null
+  },
+  {
+   "n": 3,
+   "title": "Screw the cam bolts into the top",
+   "text": "Lay the top face down on a soft surface and screw the four cam bolts into it.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Soft surface to work on (rug or blanket)",
+    "Phillips screwdriver"
+   ],
+   "start_s": null
+  },
+  {
+   "n": 4,
+   "title": "",
+   "text": "Lower the two side panels onto the cam bolts at each end.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": null
+  },
+  {
+   "n": 5,
+   "title": "",
+   "text": "Push a cam lock into each round hole and turn it with a flat screwdriver to lock the sides.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Flat screwdriver"
+   ],
+   "start_s": null
+  },
+  {
+   "n": 6,
+   "title": "",
+   "text": "Screw an angle bracket to the top at the back edge, next to each side, with two screws each.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Phillips screwdriver"
+   ],
+   "start_s": null
+  },
+  {
+   "n": 7,
+   "title": "",
+   "text": "Turn the shelf and legs over onto the sides and fix them with four long screws.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Allen key 100092"
+   ],
+   "start_s": null
+  },
+  {
+   "n": 8,
+   "title": "Mark the drill holes on the wall",
+   "text": "Stand the bench upright against the wall and mark through both bracket holes with a pencil.",
+   "note": null,
+   "warning": "Always fix the bench to the wall: with a TV on it, it can tip over if a child climbs on it.",
+   "tools": [
+    "Pencil"
+   ],
+   "start_s": null
+  },
+  {
+   "n": 9,
+   "title": "Drive the wall screws",
+   "text": "Move the bench away and drive a round-head screw into each mark, leaving the head out.",
+   "note": "Wall screws and plugs are not included. Use round-head screws that suit your wall, not countersunk ones.",
+   "warning": null,
+   "tools": [
+    "Drill for the wall holes (not shown in the manual)",
+    "Flat screwdriver"
+   ],
+   "start_s": null
+  },
+  {
+   "n": 10,
+   "title": "Fix the bench to the wall",
+   "text": "Push the bench back, hang a keyhole plate on each screw, tighten it and slide on the cover.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Flat screwdriver"
+   ],
+   "start_s": null
+  }
+ ]
+}
