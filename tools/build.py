@@ -398,7 +398,7 @@ def clip_parts(g: dict) -> list[dict]:
     """Google key moments: one schema.org Clip per step with a time in the video (merged chapters share a start, so
     a step that starts where the previous one does is folded into it)."""
     steps = [s for s in g["steps"] if s.get("start_s") is not None]
-    end_all = g.get("duration_s")
+    end_all = g.get("steps_end_s") or g.get("duration_s")  # the last step ends where the outro starts
     clips: list[dict] = []
     for i, s in enumerate(steps):
         start = int(s["start_s"])

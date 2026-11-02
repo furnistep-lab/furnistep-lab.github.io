@@ -77,11 +77,16 @@ def build_guide(spec: dict, chapters: dict | None) -> dict:
 
     starts: dict[str, float] = {}
     duration = None
+    steps_end = None  # where the last step ends in the video (the outro starts)
     if chapters:
         duration = chapters.get("duration_s")
         for c in chapters["chapters"]:
             for seg in c["segments"]:
                 starts.setdefault(seg, c["start_s"])  # a merged chapter: every step in it starts at its start
+            if "outro" in c["segments"] and c["segments"][0] != "outro":
+                steps_end = None  # outro merged into the last step: no clean end
+            elif c["segments"][0] == "outro":
+                steps_end = c["start_s"]
 
     tool_labels = {t["id"]: strip_paren(t["label"]) for t in spec["tools"]}
     steps = []
@@ -112,6 +117,7 @@ def build_guide(spec: dict, chapters: dict | None) -> dict:
         "youtube_id": None,
         "published": None,
         "duration_s": duration,
+        "steps_end_s": steps_end,
         "image": None,
         "parts": [{"label": x["label"], "qty": x["qty"]} for x in spec["parts"]],
         "hardware": [
@@ -145,7 +151,7 @@ def main(argv: list[str] | None = None) -> int:
 
     out = GUIDES / f"{g['slug']}.json"
     old = json.loads(out.read_text(encoding="utf-8")) if out.exists() else {}
-    for k in ("youtube_id", "published", "publish_at", "category", "image", "duration_s", "model3d"):
+    for k in ("youtube_id", "published", "publish_at", "category", "image", "duration_s", "steps_end_s", "model3d"):
         if old.get(k) and not g.get(k):
             g[k] = old[k]
     if not chapters and old.get("steps"):  # keep chapter times from an earlier import
