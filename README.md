@@ -26,13 +26,19 @@ python3 tools/import_guide.py ../ytproject/catalog/ikea/lack-tv-bench-aa2248458/
 python3 tools/build.py
 ```
 
-The guide shows "Video coming soon" until it has a video. When the video is public, add its ID and date
-(the other fields are kept):
+The guide shows "Video coming soon" until it has a video. As soon as the video is uploaded (still private), add its
+ID and its publish slot (the other fields are kept):
 
 ```
-python3 tools/import_guide.py <spec.json> --youtube-id VIDEO_ID --published 2026-11-03 --chapters chapters.json
+python3 tools/import_guide.py <spec.json> --youtube-id VIDEO_ID --publish-at 2026-11-03T15:00:00Z --chapters chapters.json
 python3 tools/build.py
 ```
+
+Until `--publish-at` the page says "Video out <date>" (with the visitor's local time), the player and the per-step
+video links stay off, and cards and the home page "coming up" list show the date. At that moment `assets/site.js`
+switches everything to the live video by itself, so no rebuild is needed on publish day. `--publish-at` without
+`--youtube-id` (upload not done yet) shows the date only. `--published YYYY-MM-DD` is for videos that are already
+public. The VideoObject JSON-LD gets one `Clip` per step (Google key moments) from the chapter times.
 
 `--chapters` (the `chapters.json` written by `python -m pipeline.video build`) gives each step its time in the
 video, shown as a "play from here" link. Images need Pillow (`pip install pillow`).

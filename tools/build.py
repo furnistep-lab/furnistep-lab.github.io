@@ -25,7 +25,7 @@ YOUTUBE = "https://www.youtube.com/@FurniStep"
 SUBSCRIBE = YOUTUBE + "?sub_confirmation=1"
 EMAIL = "furnistep@gmail.com"
 YEAR = 2026
-CSS_VERSION = "3"  # bump when assets/site.css or assets/site.js change, so browsers fetch the new file
+CSS_VERSION = "4"  # bump when assets/site.css or assets/site.js change, so browsers fetch the new file
 
 NAV = [("/guides/", "Guides"), ("/request/", "Request a guide"), ("/about/", "About")]
 
@@ -125,10 +125,37 @@ def layout(path: str, title: str, description: str, body: str, *, extra_head: st
 
 def load_guides() -> list[dict]:
     guides = [json.loads(p.read_text(encoding="utf-8")) for p in sorted((ROOT / "data" / "guides").glob("*.json"))]
-    # newest first: published guides by date, then upcoming ones by name
-    guides.sort(key=lambda g: (g.get("published") or "", g["family"]), reverse=True)
-    guides.sort(key=lambda g: g.get("published") is None)
+    # newest video first (publish_at, else published), then guides without a date by name
+    guides.sort(key=lambda g: (when(g), g["family"]), reverse=True)
+    guides.sort(key=lambda g: not when(g))
     return guides
+
+
+def when(g: dict) -> str:
+    """The video's publish moment as an RFC 3339 string ('' if unknown). publish_at wins over the plain date."""
+    if g.get("publish_at"):
+        return g["publish_at"]
+    return f"{g['published']}T00:00:00Z" if g.get("published") else ""
+
+
+def parse_when(s: str) -> dt.datetime:
+    return dt.datetime.fromisoformat(s.replace("Z", "+00:00"))
+
+
+def fmt_slot(s: str) -> str:
+    """'2026-11-03T15:00:00Z' -> 'Tuesday 3 November, 15:00 UTC' (the time in the visitor's zone is added by JS)."""
+    d = parse_when(s).astimezone(dt.timezone.utc)
+    return f"{d.strftime('%A')} {d.day} {d.strftime('%B')}, {d.strftime('%H:%M')} UTC"
+
+
+def fmt_short(s: str) -> str:
+    d = parse_when(s).astimezone(dt.timezone.utc)
+    return f"{d.strftime('%a')} {d.day} {d.strftime('%b')}"
+
+
+def live_attr(g: dict) -> str:
+    """data-live-at: JS switches the element to its live state from this moment (no rebuild needed)."""
+    return f' data-live-at="{e(g["publish_at"])}"' if g.get("publish_at") else ""
 
 
 def guide_url(g: dict) -> str:
@@ -151,11 +178,16 @@ def fmt_date(iso: str) -> str:
 
 
 def guide_card(g: dict) -> str:
-    status = (
-        f'<span class="tag tag-ok">{fmt_time(g["duration_s"])} video</span>'
-        if g.get("youtube_id") and g.get("duration_s")
-        else ('<span class="tag tag-ok">Video</span>' if g.get("youtube_id") else '<span class="tag">Coming soon</span>')
-    )
+    out_now = f"{fmt_time(g['duration_s'])} video" if g.get("duration_s") else "Video"
+    if g.get("publish_at"):  # scheduled: the date until it is out, then the same tag as a published video
+        status = (
+            f'<span class="tag tag-soon" data-live-at="{e(g["publish_at"])}" data-live-text="{e(out_now)}">'
+            f"Out {fmt_short(g['publish_at'])}</span>"
+        )
+    elif g.get("youtube_id"):
+        status = f'<span class="tag tag-ok">{out_now}</span>'
+    else:
+        status = '<span class="tag">Coming soon</span>'
     img = (
         f'<img src="/{e(g["image"])}" alt="{e(guide_name(g))}" width="640" height="360" loading="lazy">'
         if g.get("image")
@@ -178,15 +210,31 @@ def video_block(g: dict) -> str:
         vid = e(g["youtube_id"])
         poster = f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg"
         poster = f"/{e(g['image'])}" if g.get("image") else poster
-        return f"""<div class="video" data-yt="{vid}" data-title="{e(name)} assembly">
+        premiere = ""
+        if g.get("publish_at"):  # private until its slot: the player stays off until then (site.js)
+            btn3d = (
+                f'<a class="btn btn-yellow" href="{viewer_url(g)}">{icon("cube", "ic-xs")} See it in 3D now</a>'
+                if g.get("model3d")
+                else ""
+            )
+            sub_cls = "btn-ghost-light" if g.get("model3d") else "btn-yellow"
+            premiere = f"""<div class="premiere"><strong>Video out {e(fmt_slot(g["publish_at"]))}</strong>
+ <span class="local-time" data-at="{e(g["publish_at"])}"></span>
+ <div class="actions center">{btn3d}<a class="btn {sub_cls}" href="{SUBSCRIBE}">Subscribe to get notified</a></div></div>"""
+        return f"""<div class="video" data-yt="{vid}" data-title="{e(name)} assembly"{live_attr(g)}>
  <img src="{poster}" alt="" width="1280" height="720">
- <button class="play" type="button" aria-label="Play the {e(name)} assembly video">{icon("play", "ic-play")}</button>
+ <button class="play" type="button" aria-label="Play the {e(name)} assembly video">{icon("play", "ic-play")}</button>{premiere}
  <p class="video-note">The video plays from YouTube (privacy-enhanced mode) when you press play.
  <a href="https://www.youtube.com/watch?v={vid}">Watch on YouTube</a></p>
 </div>"""
+    if g.get("publish_at"):
+        soon = f"""<strong>Video out {e(fmt_slot(g["publish_at"]))}</strong>
+ <span class="local-time" data-at="{e(g["publish_at"])}"></span>"""
+    else:
+        soon = """<strong>Video coming soon</strong>
+ <span>New guides go live every Tuesday, Thursday and Saturday at 15:00 UTC.</span>"""
     return f"""<div class="video video-soon">
- <div class="soon-over"><strong>Video coming soon</strong>
- <span>New guides go live every Tuesday, Thursday and Saturday at 15:00 UTC.</span>
+ <div class="soon-over">{soon}
  <div class="actions center">{f'<a class="btn btn-yellow" href="{viewer_url(g)}">{icon("cube", "ic-xs")} See it in 3D now</a>' if g.get("model3d") else ""}
  <a class="btn {"btn-ghost-light" if g.get("model3d") else "btn-yellow"}" href="{SUBSCRIBE}">Subscribe to get notified</a></div></div>
 </div>"""
@@ -233,8 +281,9 @@ def guide_page(g: dict, guides: list[dict]) -> str:
         seek = ""
         if has_video and s.get("start_s") is not None:
             t = int(s["start_s"])
+            wait = " seek-wait" if g.get("publish_at") else ""  # shown once the video is out (site.js)
             seek = (
-                f'<a class="seek" href="https://www.youtube.com/watch?v={e(g["youtube_id"])}&amp;t={t}s" '
+                f'<a class="seek{wait}" href="https://www.youtube.com/watch?v={e(g["youtube_id"])}&amp;t={t}s" '
                 f'data-seek="{t}">{icon("play", "ic-xs")}{fmt_time(s["start_s"])}</a>'
             )
         if g.get("model3d"):
@@ -256,7 +305,9 @@ def guide_page(g: dict, guides: list[dict]) -> str:
     meta.append(f"{len(g['steps'])} steps")
     if g.get("duration_s"):
         meta.append(f"{fmt_time(g['duration_s'])} video")
-    if g.get("published"):
+    if g.get("publish_at"):
+        meta.append(f"Video {fmt_date(g['publish_at'][:10])}")
+    elif g.get("published"):
         meta.append(f"Published {fmt_date(g['published'])}")
     meta_html = "".join(f"<li>{e(m)}</li>" for m in meta)
 
@@ -290,20 +341,23 @@ def guide_page(g: dict, guides: list[dict]) -> str:
         ],
     }
     ld = [howto]
-    if has_video and g.get("published"):
+    if has_video and when(g):
         video = {
             "@context": "https://schema.org",
             "@type": "VideoObject",
             "name": title,
             "description": desc,
             "thumbnailUrl": [f"https://i.ytimg.com/vi/{g['youtube_id']}/maxresdefault.jpg"],
-            "uploadDate": g["published"],
+            "uploadDate": g.get("publish_at") or g["published"],
             "embedUrl": f"https://www.youtube-nocookie.com/embed/{g['youtube_id']}",
             "contentUrl": f"https://www.youtube.com/watch?v={g['youtube_id']}",
         }
         if g.get("duration_s"):
             m, s = divmod(int(g["duration_s"]), 60)
             video["duration"] = f"PT{m}M{s}S"
+        clips = clip_parts(g)
+        if clips:
+            video["hasPart"] = clips
         ld.append(video)
     ld_html = "".join(
         '<script type="application/ld+json">'
@@ -338,6 +392,30 @@ is not affiliated with, sponsored by, or endorsed by {e(g["brand"])}.</p></div>
 {related_html}"""
     og = f"/{g['image']}" if g.get("image") else ""
     return layout(url, title, desc, body, extra_head=ld_html, og_image=og)
+
+
+def clip_parts(g: dict) -> list[dict]:
+    """Google key moments: one schema.org Clip per step with a time in the video (merged chapters share a start, so
+    a step that starts where the previous one does is folded into it)."""
+    steps = [s for s in g["steps"] if s.get("start_s") is not None]
+    end_all = g.get("steps_end_s") or g.get("duration_s")  # the last step ends where the outro starts
+    clips: list[dict] = []
+    for i, s in enumerate(steps):
+        start = int(s["start_s"])
+        if clips and clips[-1]["startOffset"] == start:
+            continue
+        nxt = next((int(x["start_s"]) for x in steps[i + 1 :] if int(x["start_s"]) > start), None)
+        end = nxt if nxt is not None else (int(end_all) if end_all else None)
+        clip = {
+            "@type": "Clip",
+            "name": f"Step {s['n']}: {s['title'] or s['text']}",
+            "startOffset": start,
+            "url": f"https://www.youtube.com/watch?v={g['youtube_id']}&t={start}s",
+        }
+        if end is not None and end > start:
+            clip["endOffset"] = end
+        clips.append(clip)
+    return clips
 
 
 def viewer_url(g: dict) -> str:
@@ -457,13 +535,16 @@ def request_band() -> str:
 
 def home(guides: list[dict]) -> str:
     latest = guides[:6]
-    hero_g = next((g for g in guides if g.get("youtube_id")), guides[0] if guides else None)
+    scheduled = sorted((g for g in guides if g.get("publish_at")), key=lambda g: g["publish_at"])
+    hero_g = scheduled[0] if scheduled else next((g for g in guides if g.get("youtube_id")), guides[0] if guides else None)
     feature = ""
     if hero_g:
-        label = "Latest guide" if hero_g.get("youtube_id") else "Coming soon"
+        label = "Coming soon" if not hero_g.get("youtube_id") or hero_g.get("publish_at") else "Latest guide"
+        if hero_g.get("publish_at"):
+            label = f"Out {fmt_short(hero_g['publish_at'])}"
         feature = f"""<a class="hero-card" href="{guide_url(hero_g)}">
  <img src="/{e(hero_g["image"])}" alt="{e(guide_name(hero_g))}" width="1280" height="720">
- <span class="hero-card-label">{label}: <strong>{e(hero_g["family"])} {e(hero_g["type"])}</strong></span>
+ <span class="hero-card-label"><span{live_attr(hero_g)} data-live-text="New">{label}</span>: <strong>{e(hero_g["family"])} {e(hero_g["type"])}</strong></span>
 </a>"""
 
     steps = [
@@ -484,6 +565,13 @@ def home(guides: list[dict]) -> str:
         f'<div class="why">{icon(i)}<div><h3>{t}</h3><p>{d}</p></div></div>' for i, t, d in why
     )
     grid = "".join(guide_card(g) for g in latest)
+    coming = "".join(
+        f"""<li{live_attr(g)}><a href="{guide_url(g)}"><span class="cu-date">{e(fmt_short(g["publish_at"]))}</span>
+<span class="cu-name">{e(g["brand"])} {e(g["family"])} {e(g["type"])} <span class="muted">{e(g["dims_cm"])} cm</span></span>
+<span class="tag tag-soon" data-live-at="{e(g["publish_at"])}" data-live-text="Out now">15:00 UTC</span></a></li>"""
+        for g in scheduled
+    )
+    coming_html = f'<ol class="coming-up" aria-label="Coming up">{coming}</ol>' if coming else ""
     body = f"""<section class="hero"><div class="wrap hero-in">
  <div class="hero-text">
   <p class="eyebrow">Calm 3D assembly guides</p>
@@ -511,7 +599,7 @@ def home(guides: list[dict]) -> str:
  <div><h2>New guides every Tuesday, Thursday and Saturday</h2>
  <p>At 15:00 UTC<span id="next-slot"></span>. Subscribe on YouTube and you won't miss one.</p></div>
  <a class="btn btn-navy" href="{SUBSCRIBE}">Subscribe</a>
-</div></div></section>
+</div>{coming_html}</div></section>
 
 <section class="section section-soft"><div class="wrap">
 <h2 class="center">Why FurniStep</h2>

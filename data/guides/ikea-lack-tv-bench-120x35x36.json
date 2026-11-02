@@ -11,9 +11,10 @@
  ],
  "manual_code": "AA-2248458-3",
  "category": "TV benches & units",
- "youtube_id": null,
- "published": null,
- "duration_s": null,
+ "youtube_id": "3EoTLbvupCA",
+ "published": "2026-11-03",
+ "duration_s": 182.08,
+ "steps_end_s": 162.0,
  "image": "assets/img/guides/ikea-lack-tv-bench-120x35x36.jpg",
  "parts": [
   {
@@ -119,7 +120,7 @@
    "note": null,
    "warning": null,
    "tools": [],
-   "start_s": null
+   "start_s": 23.0
   },
   {
    "n": 2,
@@ -130,7 +131,7 @@
    "tools": [
     "Allen key 100092"
    ],
-   "start_s": null
+   "start_s": 33.0
   },
   {
    "n": 3,
@@ -142,7 +143,7 @@
     "Soft surface to work on (rug or blanket)",
     "Phillips screwdriver"
    ],
-   "start_s": null
+   "start_s": 49.0
   },
   {
    "n": 4,
@@ -151,7 +152,7 @@
    "note": null,
    "warning": null,
    "tools": [],
-   "start_s": null
+   "start_s": 63.0
   },
   {
    "n": 5,
@@ -162,7 +163,7 @@
    "tools": [
     "Flat screwdriver"
    ],
-   "start_s": null
+   "start_s": 73.0
   },
   {
    "n": 6,
@@ -173,7 +174,7 @@
    "tools": [
     "Phillips screwdriver"
    ],
-   "start_s": null
+   "start_s": 84.0
   },
   {
    "n": 7,
@@ -184,7 +185,7 @@
    "tools": [
     "Allen key 100092"
    ],
-   "start_s": null
+   "start_s": 99.0
   },
   {
    "n": 8,
@@ -195,7 +196,7 @@
    "tools": [
     "Pencil"
    ],
-   "start_s": null
+   "start_s": 119.0
   },
   {
    "n": 9,
@@ -207,7 +208,7 @@
     "Drill for the wall holes (not shown in the manual)",
     "Flat screwdriver"
    ],
-   "start_s": null
+   "start_s": 134.0
   },
   {
    "n": 10,
@@ -218,9 +219,10 @@
    "tools": [
     "Flat screwdriver"
    ],
-   "start_s": null
+   "start_s": 150.0
   }
  ],
+ "publish_at": "2026-11-03T15:00:00Z",
  "model3d": {
   "dir": "assets/3d/ikea-lack-tv-bench-120x35x36",
   "compile_key": "e86d980c14d3e51d2147dad17d3b5c92b7e20de1f5c41e796c4d317fd05919c9",

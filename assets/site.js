@@ -18,11 +18,36 @@
     box.appendChild(f);
     box.classList.add("is-playing");
   }
+  // Scheduled videos are private until data-live-at: until then the page shows the premiere time, then switches
+  // to its live state by itself (checked every 30 s, so an open page flips at 15:00 too).
+  function liveCheck() {
+    var now = Date.now();
+    document.querySelectorAll("[data-live-at]").forEach(function (el) {
+      var t = Date.parse(el.getAttribute("data-live-at"));
+      if (isNaN(t) || now < t || el.classList.contains("is-live")) return;
+      el.classList.add("is-live");
+      var txt = el.getAttribute("data-live-text");
+      if (txt) { el.textContent = txt; el.classList.remove("tag-soon"); el.classList.add("tag-ok"); }
+      if (el.matches(".video[data-yt]")) document.documentElement.classList.add("video-live");
+    });
+  }
+  liveCheck();
+  setInterval(liveCheck, 30000);
+  document.querySelectorAll(".local-time[data-at]").forEach(function (el) {
+    try {
+      var d = new Date(el.getAttribute("data-at"));
+      el.textContent = "That's " + d.toLocaleString("en-GB", { weekday: "long", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" }) + " your time.";
+    } catch (e) { /* leave it empty */ }
+  });
+
   var box = document.querySelector(".video[data-yt]");
+  if (box && !box.hasAttribute("data-live-at")) document.documentElement.classList.add("video-live");
   if (box) {
-    box.querySelector(".play").addEventListener("click", function () { play(box, 0); });
+    var live = function () { return !box.hasAttribute("data-live-at") || box.classList.contains("is-live"); };
+    box.querySelector(".play").addEventListener("click", function () { if (live()) play(box, 0); });
     document.querySelectorAll("[data-seek]").forEach(function (a) {
       a.addEventListener("click", function (ev) {
+        if (!live()) return;  // follow the link (YouTube) instead
         ev.preventDefault();
         play(box, parseInt(a.getAttribute("data-seek"), 10) || 0);
         box.scrollIntoView({ behavior: "smooth", block: "center" });
