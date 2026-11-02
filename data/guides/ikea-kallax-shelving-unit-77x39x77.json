@@ -1,0 +1,262 @@
+{
+ "slug": "ikea-kallax-shelving-unit-77x39x77",
+ "assembly_id": "ikea-kallax-shelving-unit-aa1009450",
+ "brand": "IKEA",
+ "family": "KALLAX",
+ "type": "Shelving unit",
+ "color": "White",
+ "dims_cm": "77x39x77",
+ "skus": [
+  "202.758.14"
+ ],
+ "manual_code": "AA-2703308-1",
+ "category": "Bookcases & shelves",
+ "youtube_id": null,
+ "published": "2026-11-07",
+ "duration_s": 211.08,
+ "image": "assets/img/guides/ikea-kallax-shelving-unit-77x39x77.jpg",
+ "parts": [
+  {
+   "label": "Outer panel with screw holes, top (A1)",
+   "qty": 1
+  },
+  {
+   "label": "Outer panel with screw holes, bottom (A2)",
+   "qty": 1
+  },
+  {
+   "label": "Outer panel with dowel holes, side (B1, B2)",
+   "qty": 2
+  },
+  {
+   "label": "Inner panel, long (middle shelf)",
+   "qty": 1
+  },
+  {
+   "label": "Inner panel, short (upright divider)",
+   "qty": 2
+  }
+ ],
+ "hardware": [
+  {
+   "label": "Long screw, hex socket",
+   "qty": 8,
+   "included": true
+  },
+  {
+   "label": "Wooden dowel",
+   "qty": 10,
+   "included": true
+  },
+  {
+   "label": "Short screw for the angle bracket",
+   "qty": 4,
+   "included": true
+  },
+  {
+   "label": "Angle bracket for wall fixing",
+   "qty": 2,
+   "included": true
+  },
+  {
+   "label": "Bracket cover",
+   "qty": 2,
+   "included": true
+  },
+  {
+   "label": "Keyhole plate",
+   "qty": 2,
+   "included": true
+  },
+  {
+   "label": "Round-head wall screw",
+   "qty": 2,
+   "included": false
+  },
+  {
+   "label": "Wall plug",
+   "qty": 2,
+   "included": false
+  }
+ ],
+ "tools": [
+  {
+   "label": "Allen key 100001",
+   "included": true
+  },
+  {
+   "label": "Phillips screwdriver",
+   "included": false
+  },
+  {
+   "label": "Flat screwdriver",
+   "included": false
+  },
+  {
+   "label": "Pencil",
+   "included": false
+  },
+  {
+   "label": "Soft surface to work on (rug or blanket)",
+   "included": false
+  },
+  {
+   "label": "Drill for the wall holes (not shown in the manual)",
+   "included": false
+  }
+ ],
+ "steps": [
+  {
+   "n": 1,
+   "title": "",
+   "text": "Lay the top and a side on their back edges on a rug. Join them with two long screws and the Allen key.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Soft surface to work on (rug or blanket)",
+    "Allen key 100001"
+   ],
+   "start_s": 23.0
+  },
+  {
+   "n": 2,
+   "title": "",
+   "text": "Tap two dowels into the middle of the top's inner face and push a short inner panel onto them.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 36.0
+  },
+  {
+   "n": 3,
+   "title": "",
+   "text": "Tap two dowels into the middle of the side and slide the long inner panel onto them.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 46.0
+  },
+  {
+   "n": 4,
+   "title": "",
+   "text": "Tap two dowels into the middle of the long panel's free face.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 56.0
+  },
+  {
+   "n": 5,
+   "title": "",
+   "text": "Push the second short inner panel onto these dowels.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 66.0
+  },
+  {
+   "n": 6,
+   "title": "",
+   "text": "Tap two dowels into the free end of the long panel and two into the free end of the short panel.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 76.0
+  },
+  {
+   "n": 7,
+   "title": "",
+   "text": "Push the second side onto the two dowels of the long panel.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 86.0
+  },
+  {
+   "n": 8,
+   "title": "",
+   "text": "Put the bottom panel on, onto the dowels of the short panel.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 96.0
+  },
+  {
+   "n": 9,
+   "title": "Fix the corners with long screws",
+   "text": "Fix both bottom corners with four long screws through the bottom panel and the Allen key.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Allen key 100001"
+   ],
+   "start_s": 106.0
+  },
+  {
+   "n": 10,
+   "title": "",
+   "text": "Fix the last corner with two long screws through the top into the second side.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Allen key 100001"
+   ],
+   "start_s": 118.0
+  },
+  {
+   "n": 11,
+   "title": "",
+   "text": "Stand the shelving unit upright.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 128.0
+  },
+  {
+   "n": 12,
+   "title": "",
+   "text": "Screw an angle bracket to the inside of each side, at the back just under the top, with two screws each.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Phillips screwdriver"
+   ],
+   "start_s": 138.0
+  },
+  {
+   "n": 13,
+   "title": "Mark the wall",
+   "text": "Hold the unit against the wall at the height you want and mark the wall through each bracket hole with a pencil.",
+   "note": null,
+   "warning": "Lift the unit with two people. The wall and the screws must carry its full weight.",
+   "tools": [
+    "Pencil"
+   ],
+   "start_s": 151.0
+  },
+  {
+   "n": 14,
+   "title": "Drive the wall screws",
+   "text": "Take the unit down and drive a round-head screw into each mark, leaving the head out.",
+   "note": "Wall screws and plugs are not included. Use round-head screws that suit your wall.",
+   "warning": null,
+   "tools": [
+    "Drill for the wall holes (not shown in the manual)",
+    "Flat screwdriver"
+   ],
+   "start_s": 161.0
+  },
+  {
+   "n": 15,
+   "title": "Hang the unit on the wall",
+   "text": "Hang the unit on the screws, put a keyhole plate on each bracket over the screw head, tighten the screw and push on the cover.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Flat screwdriver"
+   ],
+   "start_s": 176.0
+  }
+ ],
+ "publish_at": "2026-11-07T15:00:00Z"
+}

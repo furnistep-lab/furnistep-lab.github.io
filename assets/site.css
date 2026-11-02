@@ -294,3 +294,29 @@ p { margin: 0 0 1em; }
   .teaser-3d .btn { width: 100%; justify-content: center; }
   .step-links { flex-direction: row; grid-column: 2; justify-self: start; }
 }
+
+/* scheduled videos (data-live-at): premiere overlay until the publish time, then the normal player */
+.premiere { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; color: #fff; padding: 20px; background: radial-gradient(ellipse at 50% 40%, var(--navy-2), var(--navy) 70%); }
+.premiere::before, .premiere::after { content: ""; position: absolute; left: 0; right: 0; height: 12px; background: repeating-linear-gradient(90deg, var(--yellow) 0 3px, transparent 3px 24px); }
+.premiere::before { top: 0; } .premiere::after { bottom: 0; }
+.premiere strong { font-size: clamp(1.2rem, 3vw, 1.9rem); }
+.premiere .local-time, .soon-over .local-time { color: #e3e9ee; font-size: .95rem; }
+.video[data-live-at]:not(.is-live) .play, .video[data-live-at]:not(.is-live) .video-note { display: none; }
+.video.is-live .premiere { display: none; }
+.seek-wait { display: none !important; }
+.video-live .seek-wait { display: inline-flex !important; }
+.tag-soon { background: var(--yellow); color: var(--navy); }
+.coming-up { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 10px; }
+.coming-up a { display: flex; align-items: center; gap: 16px; padding: 14px 18px; border: 1px solid var(--line); border-radius: 12px; text-decoration: none; color: var(--ink); background: #fff; }
+.coming-up a:hover { box-shadow: var(--shadow); }
+.cu-date { font-weight: 800; color: var(--navy); min-width: 6.5em; }
+.cu-name { flex: 1; font-weight: 600; }
+@media (max-width: 560px) { .coming-up a { flex-wrap: wrap; gap: 4px 12px; } .cu-name { flex-basis: 100%; order: 3; } }
+@media (max-width: 560px) {
+  .premiere, .soon-over { gap: 4px; padding: 14px; }
+  .premiere strong, .soon-over strong { font-size: 1.05rem; }
+  .premiere .local-time, .soon-over .local-time, .soon-over span { font-size: .82rem; }
+  .premiere .btn, .soon-over .btn { padding: 8px 14px; font-size: .85rem; }
+  .premiere .btn[href*="/3d/"], .soon-over .btn[href*="/3d/"] { display: none; }  /* the 3D teaser sits right below */
+  .premiere .actions, .soon-over .actions { margin-top: 2px; }
+}

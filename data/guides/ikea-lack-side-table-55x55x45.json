@@ -1,0 +1,82 @@
+{
+ "slug": "ikea-lack-side-table-55x55x45",
+ "assembly_id": "ikea-lack-side-table-aa207276",
+ "brand": "IKEA",
+ "family": "LACK",
+ "type": "Side table",
+ "color": "White",
+ "dims_cm": "55x55x45",
+ "skus": [
+  "304.499.08"
+ ],
+ "manual_code": "AA-207276-4",
+ "category": "Tables",
+ "youtube_id": "1C-ArmmSJu4",
+ "published": "2026-11-05",
+ "duration_s": 84.08,
+ "image": "assets/img/guides/ikea-lack-side-table-55x55x45.jpg",
+ "parts": [
+  {
+   "label": "Tabletop",
+   "qty": 1
+  },
+  {
+   "label": "Leg",
+   "qty": 4
+  }
+ ],
+ "hardware": [
+  {
+   "label": "Double-ended screw",
+   "qty": 4,
+   "included": true
+  }
+ ],
+ "tools": [
+  {
+   "label": "Soft surface to work on (e.g. the box)",
+   "included": false
+  }
+ ],
+ "steps": [
+  {
+   "n": 1,
+   "title": "",
+   "text": "Lay the tabletop upside down on a soft surface.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Soft surface to work on (e.g. the box)"
+   ],
+   "start_s": 22.0
+  },
+  {
+   "n": 2,
+   "title": "",
+   "text": "Push a double-ended screw into each corner hole.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 32.0
+  },
+  {
+   "n": 3,
+   "title": "",
+   "text": "Turn each leg onto its screw: the screw turns with the leg and goes into the table.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 43.0
+  },
+  {
+   "n": 4,
+   "title": "",
+   "text": "Carefully turn the table upright.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 54.0
+  }
+ ],
+ "publish_at": "2026-11-05T15:00:00Z"
+}

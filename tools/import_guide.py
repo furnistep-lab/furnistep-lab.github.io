@@ -3,7 +3,7 @@
 
     python3 tools/import_guide.py ../ytproject/catalog/ikea/lack-tv-bench-aa2248458/spec.json \
         --image path/to/thumbnail.jpg [--chapters out/final/chapters.json] \
-        [--youtube-id VIDEO_ID --published 2026-11-03] [--category "TV benches"] [--model3d DIR]
+        [--youtube-id VIDEO_ID --publish-at 2026-11-03T15:00:00Z] [--category "TV benches"] [--model3d DIR]
 
 Writes data/guides/<slug>.json (and assets/img/guides/<slug>.jpg from --image). Re-running keeps fields that are
 already in the file and not given again (youtube_id, published, category, image), so a guide can be imported
@@ -130,6 +130,11 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--image", type=Path, help="card image, e.g. the video thumbnail (resized to 1280x720 JPEG)")
     ap.add_argument("--youtube-id")
     ap.add_argument("--published", help="publish date YYYY-MM-DD")
+    ap.add_argument(
+        "--publish-at",
+        help="scheduled publish time, RFC 3339 UTC (2026-11-03T15:00:00Z): the page says 'Premieres ...' and turns "
+        "the player on at that moment by itself",
+    )
     ap.add_argument("--category")
     ap.add_argument("--model3d", type=Path, help="folder from ytproject python -m pipeline.web export")
     a = ap.parse_args(argv)
@@ -140,7 +145,7 @@ def main(argv: list[str] | None = None) -> int:
 
     out = GUIDES / f"{g['slug']}.json"
     old = json.loads(out.read_text(encoding="utf-8")) if out.exists() else {}
-    for k in ("youtube_id", "published", "category", "image", "duration_s", "model3d"):
+    for k in ("youtube_id", "published", "publish_at", "category", "image", "duration_s", "model3d"):
         if old.get(k) and not g.get(k):
             g[k] = old[k]
     if not chapters and old.get("steps"):  # keep chapter times from an earlier import
@@ -151,6 +156,14 @@ def main(argv: list[str] | None = None) -> int:
         g["youtube_id"] = a.youtube_id
     if a.published:
         g["published"] = a.published
+    if a.publish_at:
+        import datetime as dt
+
+        t = dt.datetime.fromisoformat(a.publish_at.replace("Z", "+00:00"))
+        if t.tzinfo is None:
+            raise SystemExit("--publish-at needs a time zone, e.g. 2026-11-03T15:00:00Z")
+        g["publish_at"] = t.astimezone(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        g["published"] = g["publish_at"][:10]
     if a.category:
         g["category"] = a.category
 
