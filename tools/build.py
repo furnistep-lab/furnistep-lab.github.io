@@ -25,7 +25,7 @@ YOUTUBE = "https://www.youtube.com/@FurniStep"
 SUBSCRIBE = YOUTUBE + "?sub_confirmation=1"
 EMAIL = "furnistep@gmail.com"
 YEAR = 2026
-CSS_VERSION = "4"  # bump when assets/site.css or assets/site.js change, so browsers fetch the new file
+CSS_VERSION = "5"  # bump when assets/site.css or assets/site.js change, so browsers fetch the new file
 
 NAV = [("/guides/", "Guides"), ("/request/", "Request a guide"), ("/about/", "About")]
 
@@ -536,7 +536,7 @@ def request_band() -> str:
 def home(guides: list[dict]) -> str:
     latest = guides[:6]
     scheduled = sorted((g for g in guides if g.get("publish_at")), key=lambda g: g["publish_at"])
-    hero_g = scheduled[0] if scheduled else next((g for g in guides if g.get("youtube_id")), guides[0] if guides else None)
+    hero_g = scheduled[-1] if scheduled else next((g for g in guides if g.get("youtube_id")), guides[0] if guides else None)
     feature = ""
     if hero_g:
         label = "Coming soon" if not hero_g.get("youtube_id") or hero_g.get("publish_at") else "Latest guide"

@@ -320,3 +320,4 @@ p { margin: 0 0 1em; }
   .premiere .btn[href*="/3d/"], .soon-over .btn[href*="/3d/"] { display: none; }  /* the 3D teaser sits right below */
   .premiere .actions, .soon-over .actions { margin-top: 2px; }
 }
+.coming-up li.is-live { display: none; }  /* already out: the list only shows what is still to come */
