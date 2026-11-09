@@ -1,0 +1,271 @@
+{
+ "slug": "ikea-billy-bookcase-80x28x202",
+ "assembly_id": "ikea-billy-bookcase-aa2289108",
+ "brand": "IKEA",
+ "family": "BILLY",
+ "type": "Bookcase",
+ "color": "Brown walnut effect",
+ "dims_cm": "80x28x202",
+ "skus": [
+  "505.086.52"
+ ],
+ "manual_code": "AA-2289108-3",
+ "category": "Bookcases & shelves",
+ "youtube_id": "6kybpRCVDzA",
+ "published": "2026-11-10",
+ "duration_s": 246.08,
+ "steps_end_s": 226.0,
+ "image": "assets/img/guides/ikea-billy-bookcase-80x28x202.jpg",
+ "parts": [
+  {
+   "label": "Side panel",
+   "qty": 1
+  },
+  {
+   "label": "Side panel",
+   "qty": 1
+  },
+  {
+   "label": "Board (top, bottom and fixed shelf)",
+   "qty": 3
+  },
+  {
+   "label": "Plinth",
+   "qty": 1
+  },
+  {
+   "label": "Back panel (fibreboard, folded)",
+   "qty": 1
+  },
+  {
+   "label": "Back panel (fibreboard, folded)",
+   "qty": 1
+  },
+  {
+   "label": "Loose shelf",
+   "qty": 4
+  }
+ ],
+ "hardware": [
+  {
+   "label": "Cam bolt",
+   "qty": 12,
+   "included": true
+  },
+  {
+   "label": "Wooden dowel",
+   "qty": 16,
+   "included": true
+  },
+  {
+   "label": "Push pin for the back panel",
+   "qty": 18,
+   "included": true
+  },
+  {
+   "label": "Plug for the back panel",
+   "qty": 18,
+   "included": true
+  },
+  {
+   "label": "Cam lock",
+   "qty": 12,
+   "included": true
+  },
+  {
+   "label": "Shelf support",
+   "qty": 16,
+   "included": true
+  },
+  {
+   "label": "Screw with washer for the bracket",
+   "qty": 2,
+   "included": true
+  },
+  {
+   "label": "Wall bracket",
+   "qty": 2,
+   "included": true
+  },
+  {
+   "label": "Wall screw with washer 100823 (screw not included)",
+   "qty": 2,
+   "included": false
+  },
+  {
+   "label": "Wall plug",
+   "qty": 2,
+   "included": false
+  }
+ ],
+ "tools": [
+  {
+   "label": "Phillips screwdriver",
+   "included": false
+  },
+  {
+   "label": "Flat screwdriver",
+   "included": false
+  },
+  {
+   "label": "Soft surface to work on (rug or blanket)",
+   "included": false
+  },
+  {
+   "label": "Drill for the wall holes (not shown in the manual)",
+   "included": false
+  }
+ ],
+ "steps": [
+  {
+   "n": 1,
+   "title": "Dowels into the boards",
+   "text": "Tap the 16 wooden dowels into the holes in the ends of the three boards and the plinth.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 23.0
+  },
+  {
+   "n": 2,
+   "title": "Cam bolts into the sides",
+   "text": "Lay both side panels on a rug, inner face up, and screw six cam bolts into each one.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Soft surface to work on (rug or blanket)",
+    "Phillips screwdriver"
+   ],
+   "start_s": 34.0
+  },
+  {
+   "n": 3,
+   "title": "Boards onto the first side",
+   "text": "Stand the plinth, the bottom board and the fixed shelf on one side panel, with their dowels in its holes.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 62.0
+  },
+  {
+   "n": 4,
+   "title": "Lock the boards with cam locks",
+   "text": "Push four cam locks into the holes and turn them clockwise with a flat screwdriver to lock them.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Flat screwdriver"
+   ],
+   "start_s": 79.0
+  },
+  {
+   "n": 5,
+   "title": "Put on the top board",
+   "text": "Put the top board on the side and lock it with two cam locks.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Flat screwdriver"
+   ],
+   "start_s": 90.0
+  },
+  {
+   "n": 6,
+   "title": "Put on the second side",
+   "text": "Turn the second side over and lower it onto the dowels and cam bolts.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 108.0
+  },
+  {
+   "n": 7,
+   "title": "Lock the second side",
+   "text": "Lock the second side with the other six cam locks.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Flat screwdriver"
+   ],
+   "start_s": 125.0
+  },
+  {
+   "n": 8,
+   "title": "Slide in the back panel",
+   "text": "Turn the bookcase onto its front.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 138.0
+  },
+  {
+   "n": 9,
+   "title": "Slide in the back panel",
+   "text": "Unfold the back panel and slide it into the grooves from the bottom.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 138.0
+  },
+  {
+   "n": 10,
+   "title": "Fix the back panel",
+   "text": "Fix the back panel with 18 push fasteners: push a plug through each hole, then press a pin into it.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 160.0
+  },
+  {
+   "n": 11,
+   "title": "Fix the bookcase to the wall",
+   "text": "Stand the bookcase up and push it against the wall.",
+   "note": null,
+   "warning": "Always fix the bookcase to the wall: it can tip over and cause serious injuries.",
+   "tools": [],
+   "start_s": 174.0
+  },
+  {
+   "n": 12,
+   "title": "Fix the bookcase to the wall",
+   "text": "Screw a wall bracket onto the top at the back on each side, with a screw and washer.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Phillips screwdriver"
+   ],
+   "start_s": 174.0
+  },
+  {
+   "n": 13,
+   "title": "Fix the bookcase to the wall",
+   "text": "Drill a hole for each bracket, push in a plug and fix the bracket with a screw and washer.",
+   "note": "Wall screws and plugs are not included: choose ones that suit your wall.",
+   "warning": null,
+   "tools": [
+    "Drill for the wall holes (not shown in the manual)",
+    "Phillips screwdriver"
+   ],
+   "start_s": 174.0
+  },
+  {
+   "n": 14,
+   "title": "Push in the shelf supports",
+   "text": "Push the 16 shelf supports into the holes at the heights you want.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 206.0
+  },
+  {
+   "n": 15,
+   "title": "Lay in the shelves",
+   "text": "Lay the four shelves on the supports.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 216.0
+  }
+ ],
+ "publish_at": "2026-11-10T15:00:00Z"
+}
