@@ -1,0 +1,451 @@
+{
+ "slug": "ikea-malm-bed-frame-176x209x100",
+ "assembly_id": "ikea-malm-bed-frame-high-aa2558683",
+ "brand": "IKEA",
+ "family": "MALM",
+ "type": "Bed frame",
+ "color": "White",
+ "dims_cm": "176x209x100",
+ "skus": [
+  "402.494.71"
+ ],
+ "manual_code": "AA-2558683-1",
+ "category": "Beds",
+ "youtube_id": "8nfjAJvwFM8",
+ "published": "2026-11-12",
+ "duration_s": 390.08,
+ "steps_end_s": 370.0,
+ "image": "assets/img/guides/ikea-malm-bed-frame-176x209x100.jpg",
+ "parts": [
+  {
+   "label": "Headboard, lower part",
+   "qty": 1
+  },
+  {
+   "label": "Footboard",
+   "qty": 1
+  },
+  {
+   "label": "Headboard, upper panel",
+   "qty": 1
+  },
+  {
+   "label": "Side rail",
+   "qty": 1
+  },
+  {
+   "label": "Side rail",
+   "qty": 1
+  },
+  {
+   "label": "Slat rail (steel)",
+   "qty": 1
+  },
+  {
+   "label": "Slat rail (steel)",
+   "qty": 1
+  },
+  {
+   "label": "Middle beam SKORVA",
+   "qty": 1
+  },
+  {
+   "label": "Middle beam SKORVA",
+   "qty": 1
+  },
+  {
+   "label": "Diagonal brace",
+   "qty": 1
+  },
+  {
+   "label": "Diagonal brace",
+   "qty": 1
+  },
+  {
+   "label": "Diagonal brace",
+   "qty": 1
+  },
+  {
+   "label": "Diagonal brace",
+   "qty": 1
+  },
+  {
+   "label": "Diagonal brace",
+   "qty": 1
+  },
+  {
+   "label": "Diagonal brace",
+   "qty": 1
+  },
+  {
+   "label": "Diagonal brace",
+   "qty": 1
+  },
+  {
+   "label": "Diagonal brace",
+   "qty": 1
+  },
+  {
+   "label": "Slat (LURÖY slatted base)",
+   "qty": 26
+  },
+  {
+   "label": "Slat (LURÖY slatted base)",
+   "qty": 2
+  }
+ ],
+ "hardware": [
+  {
+   "label": "Glide with nails",
+   "qty": 6,
+   "included": true
+  },
+  {
+   "label": "Cam bolt",
+   "qty": 8,
+   "included": true
+  },
+  {
+   "label": "Short wooden dowel",
+   "qty": 12,
+   "included": true
+  },
+  {
+   "label": "Cam lock",
+   "qty": 8,
+   "included": true
+  },
+  {
+   "label": "Long wooden dowel",
+   "qty": 5,
+   "included": true
+  },
+  {
+   "label": "Hanger bolt",
+   "qty": 4,
+   "included": true
+  },
+  {
+   "label": "Plastic clip",
+   "qty": 4,
+   "included": true
+  },
+  {
+   "label": "Flange nut",
+   "qty": 4,
+   "included": true
+  },
+  {
+   "label": "Screw",
+   "qty": 20,
+   "included": true
+  },
+  {
+   "label": "Middle beam bracket",
+   "qty": 1,
+   "included": true
+  },
+  {
+   "label": "Middle beam bracket",
+   "qty": 1,
+   "included": true
+  },
+  {
+   "label": "Screw",
+   "qty": 12,
+   "included": true
+  },
+  {
+   "label": "Slat holder",
+   "qty": 4,
+   "included": true
+  },
+  {
+   "label": "Slat holder",
+   "qty": 4,
+   "included": true
+  },
+  {
+   "label": "Screw",
+   "qty": 8,
+   "included": true
+  }
+ ],
+ "tools": [
+  {
+   "label": "Soft surface to work on (rug or blanket)",
+   "included": false
+  },
+  {
+   "label": "Hammer",
+   "included": false
+  },
+  {
+   "label": "Wrench",
+   "included": true
+  },
+  {
+   "label": "Allen key",
+   "included": true
+  },
+  {
+   "label": "Phillips screwdriver",
+   "included": false
+  }
+ ],
+ "steps": [
+  {
+   "n": 1,
+   "title": "Glides into the boards",
+   "text": "Lay the lower headboard and the footboard on a rug and tap three glides into the bottom edge of each.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Soft surface to work on (rug or blanket)",
+    "Hammer"
+   ],
+   "start_s": 24.0
+  },
+  {
+   "n": 2,
+   "title": "Cam bolts into the boards",
+   "text": "Screw four cam bolts into the lower headboard: into the top and the bottom hole of the three at each end.",
+   "note": null,
+   "warning": "Stop turning when the collar of the bolt touches the board.",
+   "tools": [
+    "Wrench"
+   ],
+   "start_s": 41.0
+  },
+  {
+   "n": 3,
+   "title": "Cam bolts into the boards",
+   "text": "Screw four cam bolts into the inner face of the footboard the same way.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Wrench"
+   ],
+   "start_s": 41.0
+  },
+  {
+   "n": 4,
+   "title": "Stand up the frame parts",
+   "text": "Stand the two boards up, facing each other.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 65.0
+  },
+  {
+   "n": 5,
+   "title": "Stand up the frame parts",
+   "text": "Stand the side rails between them, with a gap at each end of the rails.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 65.0
+  },
+  {
+   "n": 6,
+   "title": "Dowels into the side rails",
+   "text": "Push three short dowels into the end of the side rail: two into the top, one into the middle hole.",
+   "note": null,
+   "warning": "Use the 12 short dowels here, not the 5 long ones.",
+   "tools": [],
+   "start_s": 88.0
+  },
+  {
+   "n": 7,
+   "title": "Dowels into the side rails",
+   "text": "Do the same at the other three rail ends.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 88.0
+  },
+  {
+   "n": 8,
+   "title": "Dowels into the side rails",
+   "text": "Do the same at the other three rail ends.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 88.0
+  },
+  {
+   "n": 9,
+   "title": "Dowels into the side rails",
+   "text": "Do the same at the other three rail ends.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 88.0
+  },
+  {
+   "n": 10,
+   "title": "Cam locks into the side rails",
+   "text": "Push the eight cam locks into the round holes at the ends of the side rails.",
+   "note": "The arrow on each lock must point to the end of the rail.",
+   "warning": null,
+   "tools": [],
+   "start_s": 129.0
+  },
+  {
+   "n": 11,
+   "title": "Join the frame",
+   "text": "Push the side rails, the headboard and the footboard together.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 139.0
+  },
+  {
+   "n": 12,
+   "title": "Tighten the cam locks",
+   "text": "Turn each cam lock clockwise with the Allen key until it is tight.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Allen key"
+   ],
+   "start_s": 149.0
+  },
+  {
+   "n": 13,
+   "title": "Long dowels into the headboard",
+   "text": "Push the five long dowels into the top edge of the lower headboard.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 161.0
+  },
+  {
+   "n": 14,
+   "title": "Bolts into the upper panel",
+   "text": "Lay the upper headboard panel on a table and screw the four hanger bolts into its bottom edge with the wrench.",
+   "note": null,
+   "warning": "Stop turning when the collar of the bolt reaches the edge.",
+   "tools": [
+    "Wrench"
+   ],
+   "start_s": 171.0
+  },
+  {
+   "n": 15,
+   "title": "Put on the upper panel",
+   "text": "Lower the upper panel onto the dowels. From the inside, push a plastic clip over each bolt and tighten a nut with the wrench.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Wrench"
+   ],
+   "start_s": 185.0
+  },
+  {
+   "n": 16,
+   "title": "Screw on the slat rails",
+   "text": "Screw a steel slat rail to the inside of each side rail with eight screws.",
+   "note": "The rails can go higher or lower, to suit the thickness of your mattress.",
+   "warning": "Use the long wood screws here, not the short machine screws.",
+   "tools": [
+    "Phillips screwdriver"
+   ],
+   "start_s": 208.0
+  },
+  {
+   "n": 17,
+   "title": "Middle beam brackets",
+   "text": "Screw a middle beam bracket to the middle of the headboard with two screws.",
+   "note": "Use the holes that match the height you chose for the slat rails.",
+   "warning": "Use the long wood screws here, not the short machine screws.",
+   "tools": [
+    "Phillips screwdriver"
+   ],
+   "start_s": 249.0
+  },
+  {
+   "n": 18,
+   "title": "Middle beam brackets",
+   "text": "Screw the second bracket to the middle of the footboard the same way.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Phillips screwdriver"
+   ],
+   "start_s": 249.0
+  },
+  {
+   "n": 19,
+   "title": "Diagonal braces",
+   "text": "Pull each diagonal brace out to length and screw it on under the bracket and under the slat rail.",
+   "note": "The braces slide out to the length you need.",
+   "warning": null,
+   "tools": [
+    "Phillips screwdriver"
+   ],
+   "start_s": 270.0
+  },
+  {
+   "n": 20,
+   "title": "Square the frame",
+   "text": "Check that the frame is square, then fix each brace with one more screw through its slot.",
+   "note": "The sides must be straight, not bowed in or out.",
+   "warning": null,
+   "tools": [
+    "Phillips screwdriver"
+   ],
+   "start_s": 294.0
+  },
+  {
+   "n": 21,
+   "title": "Put in the middle beam",
+   "text": "Lower the middle beam, still pushed together, with its head end into the bracket at the headboard.",
+   "note": null,
+   "warning": "Do not hold your hand under the end of the beam: the edge is sharp.",
+   "tools": [],
+   "start_s": 306.0
+  },
+  {
+   "n": 22,
+   "title": "Put in the middle beam",
+   "text": "Pull the inner section out by its end hook and lower it into the bracket at the footboard.",
+   "note": "Press down on the beam with your other hand while you pull.",
+   "warning": null,
+   "tools": [],
+   "start_s": 306.0
+  },
+  {
+   "n": 23,
+   "title": "Slat holders",
+   "text": "Screw four slat holders onto the slat rails and the middle beam at the head end.",
+   "note": "Only needed for the roll-out LURÖY slats, not for a slatted base with a frame.",
+   "warning": null,
+   "tools": [
+    "Phillips screwdriver"
+   ],
+   "start_s": 326.0
+  },
+  {
+   "n": 24,
+   "title": "Slat holders",
+   "text": "Screw the other four slat holders on at the foot end the same way.",
+   "note": null,
+   "warning": null,
+   "tools": [
+    "Phillips screwdriver"
+   ],
+   "start_s": 326.0
+  },
+  {
+   "n": 25,
+   "title": "Lay in the slatted bases",
+   "text": "Roll out the two slatted bases, then push the end slats inwards under the slat holders.",
+   "note": null,
+   "warning": null,
+   "tools": [],
+   "start_s": 354.0
+  }
+ ],
+ "publish_at": "2026-11-12T15:00:00Z"
+}
